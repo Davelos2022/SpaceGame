@@ -24,7 +24,7 @@ namespace SpaceGame.General
         protected Vector3 Direction { get; set; }
         protected string TargetMask { get; set; }
 
-        private bool IsCanMove = true;
+        private bool _isCanMove;
         #endregion
 
         #region Constants
@@ -46,6 +46,7 @@ namespace SpaceGame.General
 
         protected virtual void OnEnable()
         {
+            _isCanMove = true;
             Subscriptions = new CompositeDisposable();
 
             GameStateManager.PausedGame += PauseGame;
@@ -54,6 +55,7 @@ namespace SpaceGame.General
 
         protected virtual void OnDisable()
         {
+            _isCanMove = false;
             Subscriptions?.Dispose();
 
             GameStateManager.PausedGame -= PauseGame;
@@ -63,7 +65,7 @@ namespace SpaceGame.General
         protected virtual void Start()
         {
             Observable.EveryUpdate()
-            .Where(_ => IsCanMove)
+            .Where(_ => _isCanMove)
             .Subscribe(_ => Move())
             .AddTo(Subscriptions);
 
@@ -93,7 +95,7 @@ namespace SpaceGame.General
 
         public void PauseGame(bool pause)
         {
-            IsCanMove = !pause;
+            _isCanMove = !pause;
         }
 
         public abstract void Destroy();

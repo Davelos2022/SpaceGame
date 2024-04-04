@@ -6,104 +6,90 @@ namespace SpaceGame.UI
 {
     public class HUDController : MonoBehaviour
     {
-        [Header("MainMenu UI")]
+        [Header("UI Screens")]
         [SerializeField] private GameObject _mainMenuScreen;
+        [SerializeField] private GameObject _pauseScreen;
+        [SerializeField] private GameObject _gameScreen;
+        [SerializeField] private GameObject _gameOverScreen;
+
+        [Header("Main Menu Buttons")]
         [SerializeField] private Button _buttonPlay;
         [SerializeField] private Button _buttonExitGame;
-        [Header("Pause UI")]
-        [SerializeField] private GameObject _pauseScreen;
+
+        [Header("In-Game Buttons")]
+        [SerializeField] private Button _buttonPause;
+
+        [Header("Pause Screen Buttons")]
         [SerializeField] private Button _buttonReturn;
         [SerializeField] private Button _buttonRestart;
         [SerializeField] private Button _buttonExitInMenu;
-        [Header("Game UI")]
-        [SerializeField] private GameObject _gameScreen;
-        [SerializeField] private Button _buttonPause;
-        [Header("Game Over UI")]
-        [SerializeField] private GameObject _gameOverScreen;
+
+        [Header("Game Over Screen Buttons")]
         [SerializeField] private Button _buttonReplay;
         [SerializeField] private Button _buttonExit;
-
-        private GameObject _currentScreen;
 
         public Action ClickPlayGame;
         public Action<bool> ClickPause;
         public Action ClickRestart;
         public Action ClickExitMenu;
 
-        private void OnEnable()
+        private void Awake()
         {
-            _buttonPlay.onClick.AddListener(PlayGameButton);
-            _buttonExitGame.onClick.AddListener(ExitGameButton);
-
-            _buttonPause.onClick.AddListener(PauseButton);
-            _buttonRestart.onClick.AddListener(ReplayButton);
-            _buttonExitInMenu.onClick.AddListener(ExitMenuButton);
-            _buttonReturn.onClick.AddListener(PauseButton);
-
-            _buttonReplay.onClick.AddListener(ReplayButton);
-            _buttonExit.onClick.AddListener(ExitMenuButton);
+            SetupButtonListeners();
         }
 
-        private void OnDisable()
+        private void SetupButtonListeners()
         {
-            _buttonPlay.onClick.RemoveAllListeners();
-            _buttonExitGame.onClick.RemoveAllListeners();
-
-            _buttonPause.onClick.RemoveAllListeners();
-            _buttonReturn.onClick.RemoveAllListeners();
-            _buttonRestart.onClick.RemoveAllListeners();
-            _buttonExitInMenu.onClick.RemoveAllListeners();
-
-            _buttonReplay.onClick.RemoveAllListeners();
-            _buttonExit.onClick.RemoveAllListeners();
+            _buttonPlay.onClick.AddListener(PlayButton);
+            _buttonExitGame.onClick.AddListener(Application.Quit);
+            _buttonPause.onClick.AddListener(() => PauseButton());
+            _buttonReturn.onClick.AddListener(() => PauseButton());
+            _buttonRestart.onClick.AddListener(ReplayGame);
+            _buttonExitInMenu.onClick.AddListener(() => ExitToMainMenu(true));
+            _buttonReplay.onClick.AddListener(ReplayGame);
+            _buttonExit.onClick.AddListener(() => ExitToMainMenu(false));
         }
 
-        private void ControllScreen(GameObject screen, bool controll)
+
+        private void SwitchScreen(GameObject screenToShow)
         {
-            screen.SetActive(controll);
+            _mainMenuScreen.SetActive(false);
+            _gameScreen.SetActive(false);
+            _pauseScreen.SetActive(false);
+            _gameOverScreen.SetActive(false);
+
+            screenToShow.SetActive(true);
         }
 
-        #region MenuScreen
-        private void PlayGameButton()
+        private void PlayButton()
         {
             ClickPlayGame?.Invoke();
-            ControllScreen(_gameScreen, true);
-            ControllScreen(_mainMenuScreen, false);
-        }
-
-        private void ExitGameButton()
-        {
-            Application.Quit();
-        }
-        #endregion
-
-        #region GameScreen
-        public void ShowGameOverPanel()
-        {
-            ControllScreen(_gameOverScreen, true);
+            SwitchScreen(_gameScreen);
         }
 
         private void PauseButton()
         {
-            ClickPause?.Invoke(!_pauseScreen.activeSelf ? true : false);
-            ControllScreen(_pauseScreen, !_pauseScreen.activeSelf ? true : false);
+            bool isPausing = !_pauseScreen.activeSelf;
+            _pauseScreen.SetActive(isPausing);
+            ClickPause?.Invoke(isPausing);
         }
 
-        private void ExitMenuButton()
+        private void ReplayGame()
         {
-            ClickExitMenu?.Invoke();
-            ControllScreen(_pauseScreen, false);
-            ControllScreen(_gameScreen, false);
-            ControllScreen(_gameOverScreen, false);
-            ControllScreen(_mainMenuScreen, true);
-        }
-
-        private void ReplayButton()
-        {
-            ControllScreen(_pauseScreen, false);
-            ControllScreen(_gameOverScreen, false);
             ClickRestart?.Invoke();
+            SwitchScreen(_gameScreen);
         }
-        #endregion
+
+
+        private void ExitToMainMenu(bool fromPauseScreen)
+        {
+            if (fromPauseScreen) ClickExitMenu?.Invoke();
+            SwitchScreen(_mainMenuScreen);
+        }
+
+        public void ShowGameOverPanel()
+        {
+            SwitchScreen(_gameOverScreen);
+        }
     }
 }
