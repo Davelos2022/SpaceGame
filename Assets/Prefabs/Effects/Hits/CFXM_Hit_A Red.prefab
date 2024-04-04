@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Traits
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
@@ -4787,7 +4787,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 7661099616951689955}
   - component: {fileID: 3302310889789758773}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CFXM_Hit_A Red
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}

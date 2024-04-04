@@ -46,9 +46,9 @@ namespace SpaceGame.UI
             _buttonPause.onClick.AddListener(() => PauseButton());
             _buttonReturn.onClick.AddListener(() => PauseButton());
             _buttonRestart.onClick.AddListener(ReplayGame);
-            _buttonExitInMenu.onClick.AddListener(() => ExitToMainMenu(true));
+            _buttonExitInMenu.onClick.AddListener(ExitToMainMenu);
             _buttonReplay.onClick.AddListener(ReplayGame);
-            _buttonExit.onClick.AddListener(() => ExitToMainMenu(false));
+            _buttonExit.onClick.AddListener(ExitToMainMenu);
         }
 
 
@@ -82,9 +82,9 @@ namespace SpaceGame.UI
         }
 
 
-        private void ExitToMainMenu(bool fromPauseScreen)
+        private void ExitToMainMenu()
         {
-            if (fromPauseScreen) ClickExitMenu?.Invoke();
+            ClickExitMenu?.Invoke();
             SwitchScreen(_mainMenuScreen);
         }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199296298105770670}
   - component: {fileID: 39828258372068787}
   - component: {fileID: 5644543679993817475}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CFXM_Explosion_B
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 4378122543101632}
   - component: {fileID: 198539310796726034}
   - component: {fileID: 199794349257367850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9663,7 +9663,7 @@ GameObject:
   - component: {fileID: 4657741033705652}
   - component: {fileID: 198532763435066696}
   - component: {fileID: 199558835653121512}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lines
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}

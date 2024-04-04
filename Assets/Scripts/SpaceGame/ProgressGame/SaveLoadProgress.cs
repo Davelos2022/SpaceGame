@@ -5,17 +5,17 @@ namespace SpaceGame.ProgressGame
     public class SaveLoadProgress
     {
         private string _keyPoint = "PointsPlayer";
-        private string _keyCoin = "CoinsPlayer";
+        private string _keyCrystal = "CrystalPlayer";
 
         public void SaveProgress(int poins, int coins)
         {
             PlayerPrefs.SetInt(_keyPoint, poins);
-            PlayerPrefs.SetInt(_keyCoin, coins);
+            PlayerPrefs.SetInt(_keyCrystal, coins);
         }
 
         public int LoadCoinsProgress()
         {
-            return RetrieveByKey(_keyCoin);
+            return RetrieveByKey(_keyCrystal);
         }
 
         public int LoadPointProgress()

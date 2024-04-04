@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 19800000}
   - component: {fileID: 19900000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Black Hit
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
@@ -4787,7 +4787,7 @@ GameObject:
   - component: {fileID: 19900002}
   - component: {fileID: 1538846514631331264}
   - component: {fileID: 2023105030774315174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CFXM_GroundHit
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
