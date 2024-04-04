@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ed85de84b53de4c8f3fe6c126d67d9, type: 3}
+  m_Name: Enemies Data
+  m_EditorClassIdentifier: 
+  Enemies:
+  - SpriteEnemy: {fileID: 21300000, guid: 5c8d18c80fe0404489f3e32552c36443, type: 3}
+    Health: 40
+    Speed: 70
+    BulletSprite: {fileID: 21300000, guid: c118d5a9e8d214d4d994a22778918c2d, type: 3}
+    Damage: 5
+    FireRate: 0.5
+    Bonus: 50
+  - SpriteEnemy: {fileID: 21300000, guid: b4f4d7ab6b6099042b2b8ed5646473c1, type: 3}
+    Health: 60
+    Speed: 60
+    BulletSprite: {fileID: 21300000, guid: 082980deae40a9d428ef2b70d430566b, type: 3}
+    Damage: 5
+    FireRate: 0.7
+    Bonus: 80
+  - SpriteEnemy: {fileID: 21300000, guid: e2999d83dd504114882f7d3746b44cb8, type: 3}
+    Health: 80
+    Speed: 70
+    BulletSprite: {fileID: 21300000, guid: e041dd4ac3e4c05458c58f4c2ac7e8c6, type: 3}
+    Damage: 10
+    FireRate: 0.8
+    Bonus: 100
+  - SpriteEnemy: {fileID: 21300000, guid: 7cdc35b03898c134da7f8787d28e2944, type: 3}
+    Health: 120
+    Speed: 70
+    BulletSprite: {fileID: 21300000, guid: a95296dd6730b1a4898646d540f8601e, type: 3}
+    Damage: 12
+    FireRate: 0.9
+    Bonus: 150

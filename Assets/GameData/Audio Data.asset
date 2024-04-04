@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e4669bda272f949b4503ab6e9f0117, type: 3}
+  m_Name: Audio Data
+  m_EditorClassIdentifier: 
+  Audio:
+  - SoundName: Selection
+    Clip: {fileID: 8300000, guid: 643dfa39d866b1e46af2b25620071da3, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - SoundName: OST
+    Clip: {fileID: 8300000, guid: 2e39669b8193d0d46adead47bab86bfb, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 1
+  - SoundName: SpawnEnemies
+    Clip: {fileID: 8300000, guid: 95d9a4eba7ad6724494c9666d1d07c16, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - SoundName: Shoot
+    Clip: {fileID: 8300000, guid: 270e64486c471524e83309fe21f02d56, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - SoundName: Hit
+    Clip: {fileID: 8300000, guid: f9517356afb533a41b9e7cb6f155031e, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - SoundName: Destroy
+    Clip: {fileID: 8300000, guid: 9cb65eb2505fbf443ac876ba177374f9, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
+  - SoundName: GiveCrystal
+    Clip: {fileID: 8300000, guid: 82803d0c67f2b1248a32d461ae4ba67c, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0
