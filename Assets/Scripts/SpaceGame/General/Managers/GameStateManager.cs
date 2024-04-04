@@ -3,7 +3,6 @@ using System;
 using Zenject;
 using SpaceGame.UI;
 using SpaceGame.Data;
-using SpaceGame.ProgressGame;
 
 namespace SpaceGame.General
 {
@@ -13,7 +12,6 @@ namespace SpaceGame.General
         private PlayerData _currentPlayer;
 
         public PlayerData CurrentPlayer => _currentPlayer;
-
 
         public Action StarGame;
         public Action<bool> PausedGame;

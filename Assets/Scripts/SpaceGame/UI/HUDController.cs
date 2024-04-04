@@ -21,6 +21,7 @@ namespace SpaceGame.UI
         [Header("Game Over UI")]
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private Button _buttonReplay;
+        [SerializeField] private Button _buttonExit;
 
         private GameObject _currentScreen;
 
@@ -40,6 +41,7 @@ namespace SpaceGame.UI
             _buttonReturn.onClick.AddListener(PauseButton);
 
             _buttonReplay.onClick.AddListener(ReplayButton);
+            _buttonExit.onClick.AddListener(ExitMenuButton);
         }
 
         private void OnDisable()
@@ -48,11 +50,12 @@ namespace SpaceGame.UI
             _buttonExitGame.onClick.RemoveAllListeners();
 
             _buttonPause.onClick.RemoveAllListeners();
+            _buttonReturn.onClick.RemoveAllListeners();
             _buttonRestart.onClick.RemoveAllListeners();
             _buttonExitInMenu.onClick.RemoveAllListeners();
 
-            _buttonReturn.onClick.RemoveAllListeners();
             _buttonReplay.onClick.RemoveAllListeners();
+            _buttonExit.onClick.RemoveAllListeners();
         }
 
         private void ControllScreen(GameObject screen, bool controll)
@@ -91,6 +94,7 @@ namespace SpaceGame.UI
             ClickExitMenu?.Invoke();
             ControllScreen(_pauseScreen, false);
             ControllScreen(_gameScreen, false);
+            ControllScreen(_gameOverScreen, false);
             ControllScreen(_mainMenuScreen, true);
         }
 
