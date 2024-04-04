@@ -13,6 +13,7 @@ namespace SpaceGame.General
         protected RectTransform RectBullet { get; private set; }
         protected Image ImageBoxBullet { get; private set; }
         protected BoxCollider2D TriggetBullet { get; private set; }
+        protected CompositeDisposable Subscriptions { get; private set; }
         #endregion
 
         #region Properties
@@ -45,12 +46,16 @@ namespace SpaceGame.General
 
         protected virtual void OnEnable()
         {
+            Subscriptions = new CompositeDisposable();
+
             GameStateManager.PausedGame += PauseGame;
             GameStateManager.ResetGame += ResetState;
         }
 
         protected virtual void OnDisable()
         {
+            Subscriptions?.Dispose();
+
             GameStateManager.PausedGame -= PauseGame;
             GameStateManager.ResetGame -= ResetState;
         }
@@ -60,7 +65,7 @@ namespace SpaceGame.General
             Observable.EveryUpdate()
             .Where(_ => IsCanMove)
             .Subscribe(_ => Move())
-            .AddTo(this);
+            .AddTo(Subscriptions);
 
             TriggetBullet.OnTriggerEnter2DAsObservable()
              .Where(colider => colider.gameObject.layer  == LayerMask.NameToLayer(TargetMask))
@@ -71,7 +76,7 @@ namespace SpaceGame.General
                    damageable.SetDamage(DamageBullet);
                    Destroy();
                })
-                  .AddTo(this);
+                  .AddTo(Subscriptions);
         }
 
         private void InitializeComponents()
