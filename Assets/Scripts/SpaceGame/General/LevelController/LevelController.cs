@@ -142,7 +142,7 @@ namespace SpaceGame.General
                         yield return null;
                 }
 
-                Vector2 randomPosition = new Vector2(UnityEngine.Random.Range(-ScreenBorder.WidthOptimaze, ScreenBorder.WidthOptimaze), ScreenBorder.HeightOptimimaze);
+                Vector2 randomPosition = new Vector2(UnityEngine.Random.Range(-ScreenBorder.WidthBorder, ScreenBorder.WidthBorder), ScreenBorder.HeightBorder);
                 PurpleCrystal crystal = _poolManager.Get<PurpleCrystal>();
                 crystal.Init(randomPosition);
 
@@ -164,7 +164,7 @@ namespace SpaceGame.General
 
             for (int row = 0; row < _currentCountEnemy; row++)
             {
-                Vector3 enemyPosition = new Vector3(0, ScreenBorder.HeightOptimimaze + (row * OFF_SET_SPAWN), 0);
+                Vector3 enemyPosition = new Vector3(0, ScreenBorder.HeightBorder + (row * OFF_SET_SPAWN), 0);
 
                 SpaceShipEnemy spaceShipEnemy = _poolManager.Get<SpaceShipEnemy>();
                 spaceShipEnemy.Init(_enemiesConfig.Enemies[UnityEngine.Random.Range(0, _enemiesConfig.Enemies.Length)], GetDirectionalVectorByParity(row));

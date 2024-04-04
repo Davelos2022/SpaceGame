@@ -17,13 +17,11 @@ namespace SpaceGame.General
         #endregion
 
         #region Properties
-        protected GameStateManager GameStateManager { get; private set; }
-        
+        protected GameStateManager GameStateManager { get; private set; }   
         protected PoolManager PoolManager { get; private set; }
         protected float DamageBullet { get; set; }
         protected Vector3 Direction { get; set; }
         protected string TargetMask { get; set; }
-
         private bool _isCanMove;
         #endregion
 

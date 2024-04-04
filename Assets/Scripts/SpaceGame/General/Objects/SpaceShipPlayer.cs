@@ -3,16 +3,16 @@ using Zenject;
 using DG.Tweening;
 using SpaceGame.Data;
 using SpaceGame.UI;
+
 namespace SpaceGame.General
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class SpaceShipPlayer : SpaceShipBase, IGiveCrystal
     {
         private PlayerData _playerData;
         private PlayerUI _playerUI;
 
         private const float DURATION_ANIM = .2f;
-        private const float SENSITIVY_FACTOR = 80f; // Фактор чувствительности для регулировки влияния движения мыши
+        private const float SENSITIVY_FACTOR = 80f; // Sensitivity factor to adjust the effect of mouse movement
 
         [Inject]
         public void Construct(PlayerUI playerUI)
@@ -79,7 +79,7 @@ namespace SpaceGame.General
         public override void Move()
         {
             RigidbodySpaceShip.velocity = new Vector2(GetInput() * Speed, RigidbodySpaceShip.velocity.y);
-            float clampedX = Mathf.Clamp(RectSpaceShip.anchoredPosition.x, -ScreenBorder.WidthOptimaze, ScreenBorder.WidthOptimaze);
+            float clampedX = Mathf.Clamp(RectSpaceShip.anchoredPosition.x, -ScreenBorder.WidthBorder, ScreenBorder.WidthBorder);
             RectSpaceShip.anchoredPosition = new Vector3(clampedX, RectSpaceShip.anchoredPosition.y);
         }
 

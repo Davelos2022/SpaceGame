@@ -116,7 +116,7 @@ namespace SpaceGame.General
 
         public void Attack()
         {
-            if (RectSpaceShip.anchoredPosition.y <= ScreenBorder.HeightOptimimaze)
+            if (RectSpaceShip.anchoredPosition.y <= ScreenBorder.HeightBorder)
             {
                 TimeNextShot -= Time.deltaTime;
 

@@ -2431,15 +2431,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainMenuScreen: {fileID: 1558596035}
+  _pauseScreen: {fileID: 1212391894}
+  _gameScreen: {fileID: 1306939600}
+  _gameOverScreen: {fileID: 320209026}
   _buttonPlay: {fileID: 49530103}
   _buttonExitGame: {fileID: 1983757703}
-  _pauseScreen: {fileID: 1212391894}
+  _buttonPause: {fileID: 228190514}
   _buttonReturn: {fileID: 1641053668}
   _buttonRestart: {fileID: 2098473982}
   _buttonExitInMenu: {fileID: 1055099184}
-  _gameScreen: {fileID: 1306939600}
-  _buttonPause: {fileID: 228190514}
-  _gameOverScreen: {fileID: 320209026}
   _buttonReplay: {fileID: 1686889230}
   _buttonExit: {fileID: 1447929079}
 --- !u!4 &1062534281

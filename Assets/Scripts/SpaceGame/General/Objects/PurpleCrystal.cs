@@ -47,7 +47,7 @@ namespace SpaceGame.General
             RectItem.position += Vector3.down * _speedMove * Time.deltaTime;
             RectItem.Rotate(new Vector3(0, 0, _speedMove * Time.deltaTime));
 
-            if (RectItem.anchoredPosition.y < -ScreenBorder.HeightOptimimaze)
+            if (RectItem.anchoredPosition.y < -ScreenBorder.HeightBorder)
                 Destroy();
         }
 

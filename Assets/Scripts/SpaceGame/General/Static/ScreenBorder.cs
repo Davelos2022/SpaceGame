@@ -12,7 +12,7 @@ namespace SpaceGame.General
 
         public static int HeightScreen => _heightScreen;
         public static int WidthScreen => _widthScreen;
-        public static float HeightOptimimaze => _heightBorder;
-        public static float WidthOptimaze => _widthBorder;
+        public static float HeightBorder => _heightBorder;
+        public static float WidthBorder => _widthBorder;
     }
 }

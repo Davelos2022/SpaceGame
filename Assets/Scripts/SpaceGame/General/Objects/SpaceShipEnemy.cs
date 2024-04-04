@@ -39,8 +39,8 @@ namespace SpaceGame.General
             {
                 RectSpaceShip.anchoredPosition += _directionMove * Speed * Time.deltaTime;
 
-                if (RectSpaceShip.anchoredPosition.x >= ScreenBorder.WidthOptimaze && _directionMove == Vector2.right
-                    || RectSpaceShip.anchoredPosition.x <= -ScreenBorder.WidthOptimaze && _directionMove == Vector2.left)
+                if (RectSpaceShip.anchoredPosition.x >= ScreenBorder.WidthBorder && _directionMove == Vector2.right
+                    || RectSpaceShip.anchoredPosition.x <= -ScreenBorder.WidthBorder && _directionMove == Vector2.left)
                     ChangePosition();
             }
         }

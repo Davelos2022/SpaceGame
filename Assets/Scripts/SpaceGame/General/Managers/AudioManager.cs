@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Zenject;
+using SpaceGame.Data;
 
 namespace SpaceGame.General
 {
