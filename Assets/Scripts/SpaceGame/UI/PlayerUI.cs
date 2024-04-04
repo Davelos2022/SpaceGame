@@ -72,7 +72,7 @@ namespace SpaceGame.UI
 
         public void ShowNumberWave(int currentWave)
         {
-            _textWave.text = WAVE_TEXT + currentWave;
+            _textWave.text = $"{WAVE_TEXT} {currentWave}";
             _textWave.gameObject.SetActive(true);
 
             AnimUI(_textWave.transform, true);

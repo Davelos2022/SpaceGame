@@ -15,33 +15,34 @@ namespace SpaceGame.General
         private void OnEnable()
         {
             GameStateManager.PausedGame += PauseGame;
-            Subscriptions = new CompositeDisposable();
-            _isCanMove = true;
+            StartMove();
         }
 
         private void OnDisable()
         {
-            _isCanMove = false;
             GameStateManager.PausedGame -= PauseGame;
-            Subscriptions?.Dispose();
         }
 
-        void Start()
+        private void StartMove()
         {
+            Subscriptions = new CompositeDisposable();
+            _isCanMove = true;
+
             Observable.EveryUpdate()
-            .Where(_ => _isCanMove)
-            .Subscribe(_ => Move()).AddTo(this);
+           .Where(_ => _isCanMove)
+           .Subscribe(_ => Move()).AddTo(Subscriptions);
 
             TriggerItem.OnTriggerEnter2DAsObservable()
             .Select(other => other.GetComponent<IGiveCrystal>())
              .Where(damageable => damageable != null)
              .Subscribe(damageable =>
-              {
-                  damageable.GiveCrystal(_valueCrystal);
-                  Destroy();
-              }).AddTo(Subscriptions);
+             {
+                 damageable.GiveCrystal(_valueCrystal);
+                 Destroy();
+             }).AddTo(Subscriptions);
         }
 
+  
         public void Move()
         {
             RectItem.position += Vector3.down * _speedMove * Time.deltaTime;
@@ -53,6 +54,8 @@ namespace SpaceGame.General
 
         public override void Destroy()
         {
+            _isCanMove = false;
+            Subscriptions?.Dispose();
             PoolManager.Return(this);
         }
 
