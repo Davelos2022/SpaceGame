@@ -2441,6 +2441,7 @@ MonoBehaviour:
   _buttonPause: {fileID: 228190514}
   _gameOverScreen: {fileID: 320209026}
   _buttonReplay: {fileID: 1686889230}
+  _buttonExit: {fileID: 1447929079}
 --- !u!4 &1062534281
 Transform:
   m_ObjectHideFlags: 0
