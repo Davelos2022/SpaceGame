@@ -36,6 +36,7 @@ namespace SpaceGame.UI
         private void Awake()
         {
             SetupButtonListeners();
+            SwitchScreen(_mainMenuScreen);
         }
 
         private void SetupButtonListeners()
