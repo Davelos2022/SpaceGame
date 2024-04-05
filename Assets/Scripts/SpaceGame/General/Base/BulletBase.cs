@@ -26,7 +26,7 @@ namespace SpaceGame.General
         #endregion
 
         #region Constants
-        protected const float SPEEED_BULLET = 90f;
+        protected const float SPEED_BULLET = 90f;
         #endregion
 
         #region Methods

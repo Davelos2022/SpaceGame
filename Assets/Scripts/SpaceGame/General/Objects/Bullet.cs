@@ -31,7 +31,7 @@ namespace SpaceGame.General
             if (RectBullet.anchoredPosition.y > ScreenBorder.HeightScreen || RectBullet.anchoredPosition.y < -ScreenBorder.WidthScreen)
                 PoolManager.Return(this);
             else
-                RectBullet.position += Direction * SPEEED_BULLET * Time.deltaTime;
+                RectBullet.position += Direction * SPEED_BULLET * Time.deltaTime;
         }
 
         public override void Destroy()

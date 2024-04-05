@@ -24,7 +24,7 @@ namespace SpaceGame.General
         {
             GameStateManager.StarGame += Init;
             LevelController.Wave += _playerUI.ShowNumberWave;
-            LevelController.ComletedWave += _playerUI.SaveProgress;
+            LevelController.CompletedWave += _playerUI.SaveProgress;
             SpaceShipEnemy.DestroyEnemy += _playerUI.IncreasePoints;
         }
 
@@ -32,7 +32,7 @@ namespace SpaceGame.General
         {
             GameStateManager.StarGame -= Init;
             LevelController.Wave -= _playerUI.ShowNumberWave;
-            LevelController.ComletedWave -= _playerUI.SaveProgress;
+            LevelController.CompletedWave -= _playerUI.SaveProgress;
             SpaceShipEnemy.DestroyEnemy -= _playerUI.IncreasePoints;
         }
 

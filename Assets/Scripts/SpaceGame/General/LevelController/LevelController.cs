@@ -37,7 +37,7 @@ namespace SpaceGame.General
         private bool _isPaused;
 
         public Action<int> Wave;
-        public Action ComletedWave;
+        public Action CompletedWave;
 
         public bool isActiveEnemies => _isActiveEnemies;
 
@@ -184,7 +184,7 @@ namespace SpaceGame.General
 
             if (_currentCountEnemy <= 0)
             {
-                ComletedWave?.Invoke();
+                CompletedWave?.Invoke();
                 _currentWave++;
                 _isActiveEnemies = false;
                 ActivateWave();
