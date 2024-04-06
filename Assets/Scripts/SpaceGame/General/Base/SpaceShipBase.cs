@@ -125,7 +125,7 @@ namespace SpaceGame.General
                 bullet.Init(BulletSprite, spawnPosition, DirectionFire, Damage, _targetNameMask);
                 TimeNextShot = 1f / FireRate;
 
-                AudioManager.Play(AudioClipsName.Shoot);
+                AudioManager.Play(AudioClipsNames.Shoot);
             }
         }
 
@@ -133,7 +133,7 @@ namespace SpaceGame.General
         {
             if (Health <= 0) return;
 
-            AudioManager.Play(AudioClipsName.Hit);
+            AudioManager.Play(AudioClipsNames.Hit);
             EffectHit hit = PoolManager.Get<EffectHit>();
             hit.Init(RectSpaceShip.position);
             Health -= damage;
@@ -143,7 +143,7 @@ namespace SpaceGame.General
 
         public virtual void Destroy()
         {
-            AudioManager.Play(AudioClipsName.Destroy);
+            AudioManager.Play(AudioClipsNames.Destroy);
             EffectDestroy effectDestroy = PoolManager.Get<EffectDestroy>();
             effectDestroy.Init(RectSpaceShip.position);
         }

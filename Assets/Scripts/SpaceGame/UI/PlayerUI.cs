@@ -13,33 +13,32 @@ namespace SpaceGame.UI
         [SerializeField] private TextMeshProUGUI _textWave;
         [SerializeField] private Slider _sliderHealthPlayer;
 
-        private SaveLoadProgress _progressPlayer;
-        private int _currentPoints;
-        private int _currentCystals;
-
-        public int CurrentPoint => _currentPoints;
-        public int CurrentCoins => _currentCystals;
+        private AccountPlayer _accountPlayer;
 
         private const string WAVE_TEXT = "Wave";
         private const float DURATION = .2f;
 
+        private void Awake()
+        {
+            LoadProgress();
+
+        }
         private void LoadProgress()
         {
-            _progressPlayer = new SaveLoadProgress();
-            _currentPoints = _progressPlayer.LoadPointProgress();
-            _currentCystals = _progressPlayer.LoadCoinsProgress();
+            _accountPlayer = new AccountPlayer();
+            _accountPlayer.InitAccount();
         }
 
         public void SaveProgress()
         {
-            _progressPlayer.SaveProgress(_currentPoints, _currentCystals);
+            bool initPfrogress = int.TryParse(_pointsCountText.text, out int resultPoints) & int.TryParse(_crystalCountText.text, out int resultCrystals);
+            if (initPfrogress) _accountPlayer.Set(resultPoints, resultCrystals);
         }
 
         public void InitScore()
         {
-            LoadProgress();
-            _pointsCountText.text = $"{_currentPoints}";
-            _crystalCountText.text = $"{_currentCystals}";
+            _pointsCountText.text = $"{_accountPlayer.CountPoints}";
+            _crystalCountText.text = $"{_accountPlayer.CountCrystal}";
         }
 
         public void InitHealth(float health)
@@ -50,17 +49,19 @@ namespace SpaceGame.UI
 
         public void IncreasePoints(int points)
         {
-            _currentPoints += points;
-            _pointsCountText.text = $"{_currentPoints}";
+            if (!int.TryParse(_pointsCountText.text, out int currentPoints)) return;
 
+            int result = currentPoints + points;
+            _pointsCountText.text = $"{result}";
             AnimUI(_pointsCountText.transform);
         }
 
-        public void IncreaseCrystal(int coins)
+        public void IncreaseCrystal(int crystals)
         {
-            _currentCystals += coins;
-            _crystalCountText.text = $"{_currentCystals}";
+            if (!int.TryParse(_crystalCountText.text, out int currentCrystals)) return;
 
+            int result = currentCrystals + crystals;
+            _crystalCountText.text = $"{result}";
             AnimUI(_crystalCountText.transform);
         }
 
@@ -74,7 +75,6 @@ namespace SpaceGame.UI
         {
             _textWave.text = $"{WAVE_TEXT} {currentWave}";
             _textWave.gameObject.SetActive(true);
-
             AnimUI(_textWave.transform, true);
         }
 
@@ -82,7 +82,7 @@ namespace SpaceGame.UI
         {
             transform.DOScale(Vector3.one / .7f, DURATION).OnComplete(() =>
             {
-                transform.DOScale(Vector3.one, DURATION).OnComplete(() => 
+                transform.DOScale(Vector3.one, DURATION).OnComplete(() =>
                 {
                     transform.gameObject.SetActive(deactiveUI ? false : true);
 

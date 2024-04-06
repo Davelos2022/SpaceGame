@@ -11,7 +11,7 @@ namespace SpaceGame.General
         private HUDController _mainUI;
         private PlayerData _currentPlayer;
         public PlayerData CurrentPlayer => _currentPlayer;
-
+        
         public Action StarGame;
         public Action<bool> PausedGame;
         public Action ResetGame;

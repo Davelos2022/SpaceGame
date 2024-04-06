@@ -48,7 +48,7 @@ namespace SpaceGame.UI
 
         private void Selection(Button button, PlayerData currentPlayer)
         {
-            _audioManager.Play(AudioClipsName.Selection);
+            _audioManager.Play(AudioClipsNames.Selection);
             _selectionObject.transform.position = button.transform.position;
             _selectionObject.transform.SetParent(button.transform);
             _selectionObject.SetActive(true);

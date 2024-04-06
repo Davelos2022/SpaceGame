@@ -22,7 +22,7 @@ namespace SpaceGame.General
 
         private void OnEnable()
         {
-            Play(AudioClipsName.Ost);
+            Play(AudioClipsNames.Ost);
         }
 
         private void Initialize()

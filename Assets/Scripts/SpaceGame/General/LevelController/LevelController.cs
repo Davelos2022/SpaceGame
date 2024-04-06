@@ -28,7 +28,7 @@ namespace SpaceGame.General
         private CompositeDisposable _subscriptions;
         private bool _isMoving;
 
-        private int _currentCountEnemy;
+        private int _currentCountEnemies;
         private int _currentWave = 1;
         private const float OFF_SET_SPAWN = 150f;
 
@@ -152,17 +152,15 @@ namespace SpaceGame.General
             _isMoving = false;
             _subscriptions?.Dispose();
             Wave?.Invoke(_currentWave);
-
-            _isActiveEnemies = true;
             SpawnEnemies();
         }
 
         private void SpawnEnemies()
         {
-            _currentCountEnemy = UnityEngine.Random.Range(_minCountEnemy, _maxCountEnemy);
-            _audioManager.Play(AudioClipsName.SpawnEnemies);
+            _currentCountEnemies = UnityEngine.Random.Range(_minCountEnemy, _maxCountEnemy);
+            _audioManager.Play(AudioClipsNames.SpawnEnemies);
 
-            for (int row = 0; row < _currentCountEnemy; row++)
+            for (int row = 0; row < _currentCountEnemies; row++)
             {
                 Vector3 enemyPosition = new Vector3(0, ScreenBorder.HeightBorder + (row * OFF_SET_SPAWN), 0);
 
@@ -180,9 +178,11 @@ namespace SpaceGame.General
 
         private void CountEnemiesControll()
         {
-            _currentCountEnemy--;
+            if (_currentCountEnemies <= 0) return;
 
-            if (_currentCountEnemy <= 0)
+            _currentCountEnemies--;
+
+            if (_currentCountEnemies <= 0)
             {
                 CompletedWave?.Invoke();
                 _currentWave++;

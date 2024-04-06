@@ -13,14 +13,14 @@ namespace SpaceGame.ProgressGame
             PlayerPrefs.SetInt(_keyCrystal, coins);
         }
 
-        public int LoadCoinsProgress()
-        {
-            return RetrieveByKey(_keyCrystal);
-        }
-
-        public int LoadPointProgress()
+        public int LoadPointsProgress()
         {
             return RetrieveByKey(_keyPoint);
+        }
+
+        public int LoadCrystalsProgress()
+        {
+            return RetrieveByKey(_keyCrystal);
         }
 
         private int RetrieveByKey(string key)

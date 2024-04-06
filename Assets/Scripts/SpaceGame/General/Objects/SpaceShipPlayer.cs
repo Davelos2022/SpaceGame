@@ -20,9 +20,14 @@ namespace SpaceGame.General
             _playerUI = playerUI;
         }
 
-        protected override void Start()
+        protected override void Awake()
         {
             InitController();
+            base.Awake();
+        }
+
+        protected override void Start()
+        {
             GameStateManager.StarGame += Init;
             LevelController.Wave += _playerUI.ShowNumberWave;
             LevelController.CompletedWave += _playerUI.SaveProgress;
@@ -92,7 +97,7 @@ namespace SpaceGame.General
 
         public void GiveCrystal(int value)
         {
-            AudioManager.Play(AudioClipsName.GiveCrystal);
+            AudioManager.Play(AudioClipsNames.GiveCrystal);
             RectSpaceShip.transform.DOScale(Vector3.one / .8f, DURATION_ANIM).OnComplete(() =>
             {
                 RectSpaceShip.transform.DOScale(Vector3.one, DURATION_ANIM).SetAutoKill(true);
