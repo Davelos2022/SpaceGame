@@ -10,9 +10,9 @@ namespace SpaceGame.General
     {
         private PlayerData _playerData;
         private PlayerUI _playerUI;
+        private IInputHandler _inputHandler;
 
         private const float DURATION_ANIM = .2f;
-        private const float SENSITIVY_FACTOR = 80f; // Sensitivity factor to adjust the effect of mouse movement
 
         [Inject]
         public void Construct(PlayerUI playerUI)
@@ -22,6 +22,7 @@ namespace SpaceGame.General
 
         protected override void Start()
         {
+            InitController();
             GameStateManager.StarGame += Init;
             LevelController.Wave += _playerUI.ShowNumberWave;
             LevelController.CompletedWave += _playerUI.SaveProgress;
@@ -57,28 +58,15 @@ namespace SpaceGame.General
             RectSpaceShip.gameObject.SetActive(true);
         }
 
-        private float GetInput()
+        private void InitController()
         {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    return touch.deltaPosition.x;
-                }
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                return Input.GetAxis("Mouse X") * SENSITIVY_FACTOR;
-            }
-
-            return 0f;
+            _inputHandler = Application.isMobilePlatform ? new MobileInputHandler() : new PcInputHandler();
         }
 
         public override void Move()
         {
-            RigidbodySpaceShip.velocity = new Vector2(GetInput() * Speed, RigidbodySpaceShip.velocity.y);
+            float input = _inputHandler.GetInput();
+            RigidbodySpaceShip.velocity = new Vector2(input * Speed, RigidbodySpaceShip.velocity.y);
             float clampedX = Mathf.Clamp(RectSpaceShip.anchoredPosition.x, -ScreenBorder.WidthBorder, ScreenBorder.WidthBorder);
             RectSpaceShip.anchoredPosition = new Vector3(clampedX, RectSpaceShip.anchoredPosition.y);
         }
