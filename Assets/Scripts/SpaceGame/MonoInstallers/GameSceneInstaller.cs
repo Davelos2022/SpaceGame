@@ -4,12 +4,13 @@ using SpaceGame.UI;
 using UnityEngine;
 using SpaceGame.Data;
 
-namespace SpaceGame.MonoInstalllers
+namespace SpaceGame.MonoInstallers
 {
     public class GameSceneInstaller : MonoInstaller
     {
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private AudioData _audioData;
+
         public override void InstallBindings()
         {
             InstallGeneral();

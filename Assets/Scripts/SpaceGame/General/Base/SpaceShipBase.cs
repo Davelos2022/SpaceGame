@@ -116,19 +116,16 @@ namespace SpaceGame.General
 
         public void Attack()
         {
-            if (RectSpaceShip.anchoredPosition.y <= ScreenBorder.HeightBorder)
+            TimeNextShot -= Time.deltaTime;
+
+            if (TimeNextShot <= 0f)
             {
-                TimeNextShot -= Time.deltaTime;
+                Vector3 spawnPosition = new Vector3(RectSpaceShip.position.x, RectSpaceShip.position.y + DirectionFire.y, 0);
+                Bullet bullet = PoolManager.Get<Bullet>();
+                bullet.Init(BulletSprite, spawnPosition, DirectionFire, Damage, _targetNameMask);
+                TimeNextShot = 1f / FireRate;
 
-                if (TimeNextShot <= 0f)
-                {
-                    Vector3 spawnPosition = new Vector3(RectSpaceShip.position.x, RectSpaceShip.position.y + DirectionFire.y, 0);
-                    Bullet bullet = PoolManager.Get<Bullet>();
-                    bullet.Init(BulletSprite, spawnPosition, DirectionFire, Damage, _targetNameMask);
-                    TimeNextShot = 1f / FireRate;
-
-                    AudioManager.Play(AudioClipsName.Shoot);
-                }
+                AudioManager.Play(AudioClipsName.Shoot);
             }
         }
 

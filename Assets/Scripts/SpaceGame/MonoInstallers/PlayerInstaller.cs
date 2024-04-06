@@ -2,7 +2,7 @@ using Zenject;
 using UnityEngine;
 using SpaceGame.Data;
 
-namespace SpaceGame.MonoInstalllers
+namespace SpaceGame.MonoInstallers
 {
     public class PlayerInstaller : MonoInstaller
     {
