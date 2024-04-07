@@ -1,9 +1,9 @@
-using UnityEngine;
-using UniRx;
-using System.Collections;
-using Zenject;
-using System;
 using SpaceGame.Data;
+using System;
+using System.Collections;
+using UniRx;
+using UnityEngine;
+using Zenject;
 
 namespace SpaceGame.General
 {
@@ -12,13 +12,16 @@ namespace SpaceGame.General
         [Header("Move settings")]
         [SerializeField] private RectTransform[] _backGroundLevel;
         [SerializeField] private float _speedMoveLevel;
-
+        [Space]
         [Header("Wave settings")]
         [SerializeField] [Range(2, 5)] private int _minCountEnemy;
         [SerializeField] [Range(5, 10)] private int _maxCountEnemy;
+        [Space]
         [SerializeField] [Range(5, 10)] private int _minCountCrystal;
         [SerializeField] [Range(10, 25)] private int _maxCountCrystal;
         [SerializeField] [Range(1f, 2f)] private float _timeToNextCrystal;
+        [Space]
+        [SerializeField] [Range(1f, 100f)] private float _dropPercentageAidKLit;
 
         private GameStateManager _gameStateManager;
         private PoolManager _poolManager;
@@ -27,6 +30,7 @@ namespace SpaceGame.General
 
         private CompositeDisposable _subscriptions;
         private bool _isMoving;
+        private const int MAX_PERCENTAGE = 100;
 
         private int _currentCountEnemies;
         private int _currentWave = 1;
@@ -34,12 +38,10 @@ namespace SpaceGame.General
 
         private Coroutine _myCoroutine;
         private bool _isActiveEnemies;
-        private bool _isPaused;
 
         public Action<int> Wave;
         public Action CompletedWave;
 
-        public bool isActiveEnemies => _isActiveEnemies;
 
         [Inject]
         public void Construct(GameStateManager gameStateManager, EnemiesConfig enemiesConfig, PoolManager poolManager, AudioManager audioManager)
@@ -74,8 +76,6 @@ namespace SpaceGame.General
 
         public void PauseGame(bool pause)
         {
-            _isPaused = pause;
-
             if (!_isActiveEnemies)
                 _isMoving = !pause;
         }
@@ -136,15 +136,22 @@ namespace SpaceGame.General
 
             for (int x = 0; x < randomCountCrystal; x++)
             {
-                if (_isPaused)
+                if (!_isMoving)
                 {
-                    while (_isPaused)
+                    while (!_isMoving)
                         yield return null;
                 }
 
-                Vector2 randomPosition = new Vector2(UnityEngine.Random.Range(-ScreenBorder.WidthBorder, ScreenBorder.WidthBorder), ScreenBorder.HeightBorder);
+                Vector2 positionCrystal = GetPositionSpawn();
                 PurpleCrystal crystal = _poolManager.Get<PurpleCrystal>();
-                crystal.Init(randomPosition);
+                crystal.Spawn(positionCrystal);
+
+                if (UnityEngine.Random.value < (_dropPercentageAidKLit / MAX_PERCENTAGE))
+                {
+                    Vector2 positionAidKit = GetPositionSpawn();
+                    AidKit aidKit = _poolManager.Get<AidKit>();
+                    aidKit.Spawn(positionAidKit);
+                }
 
                 yield return new WaitForSeconds(_timeToNextCrystal);
             }
@@ -153,6 +160,12 @@ namespace SpaceGame.General
             _subscriptions?.Dispose();
             Wave?.Invoke(_currentWave);
             SpawnEnemies();
+        }
+
+        private Vector2 GetPositionSpawn()
+        {
+            Vector2 position = new Vector2(UnityEngine.Random.Range(-ScreenBorder.WidthBorder, ScreenBorder.WidthBorder), ScreenBorder.HeightBorder);
+            return position;
         }
 
         private void SpawnEnemies()

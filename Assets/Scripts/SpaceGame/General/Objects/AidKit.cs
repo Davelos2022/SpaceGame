@@ -1,13 +1,12 @@
-using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine;
 
 namespace SpaceGame.General
 {
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class PurpleCrystal : Item, IMoveble, IRotation
+    public class AidKit : Item, IMoveble, IRotation
     {
-        [SerializeField] private int _valueCrystal;
+        [SerializeField] private int _valueAidKit;
         [SerializeField] private float _speedMove;
         [SerializeField] private float _speedRotation;
 
@@ -25,12 +24,12 @@ namespace SpaceGame.General
 
         protected override void ActiveItem()
         {
+            Subscriptions = new CompositeDisposable();
             StartMove();
         }
 
-        public void StartMove()
+        private void StartMove()
         {
-            Subscriptions = new CompositeDisposable();
             _isCanMove = true;
 
             Observable.EveryUpdate()
@@ -38,12 +37,13 @@ namespace SpaceGame.General
            .Subscribe(_ => { Move(); Rotation(); }).AddTo(Subscriptions);
 
             TriggerItem.OnTriggerEnter2DAsObservable()
-            .Select(other => other.GetComponent<IGiveCrystal>())
-             .Where(crystal => crystal != null)
-             .Subscribe(crystal =>
+            .Select(other => other.GetComponent<IGiveAidKit>())
+             .Where(aidKit => aidKit != null)
+             .Subscribe(aidkit =>
              {
-                 crystal.GiveCrystal(_valueCrystal);
-                 Destroy();
+                 if (aidkit.GiveAidKit(_valueAidKit))
+                     Destroy();
+
              }).AddTo(Subscriptions);
         }
 

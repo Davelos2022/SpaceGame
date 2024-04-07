@@ -65,10 +65,9 @@ namespace SpaceGame.UI
             AnimUI(_crystalCountText.transform);
         }
 
-        public void SetHealth(float damage)
+        public void SetHealth(float health)
         {
-            if (_sliderHealthPlayer.value <= 0) return;
-            _sliderHealthPlayer.value -= damage;
+            _sliderHealthPlayer.DOValue(health, DURATION).SetAutoKill(true);
         }
 
         public void ShowNumberWave(int currentWave)

@@ -1,20 +1,23 @@
 using UnityEngine;
-using SpaceGame.General;
-public class EffectHit : VisualEffect
+
+namespace SpaceGame.General
 {
-    public override void Init(Vector3 startPosition)
+    public class EffectHit : VisualEffect
     {
-        transform.position = startPosition;
-    }
+        public override void Init(Vector3 startPosition)
+        {
+            transform.position = startPosition;
+        }
 
-    protected override void OnLifetimeEnd()
-    {
-        PoolManager.Return(this);
-    }
+        protected override void OnLifetimeEnd()
+        {
+            PoolManager.Return(this);
+        }
 
-    public override void ResetState()
-    {
-        base.ResetState();
-        OnLifetimeEnd();
+        public override void ResetState()
+        {
+            base.ResetState();
+            OnLifetimeEnd();
+        }
     }
 }

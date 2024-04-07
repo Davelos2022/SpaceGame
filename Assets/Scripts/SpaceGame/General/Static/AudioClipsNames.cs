@@ -10,7 +10,7 @@ namespace SpaceGame.General
         private static string _ost = "OST";
         private static string _giveCrystal = "GiveCrystal";
         private static string _spawnEnemies = "SpawnEnemies";
-
+        private static string _aidKit = "AidKit";
         public static string Selection => _selection;
         public static string Shoot => _shoot;
         public static string Hit => _hit;
@@ -18,6 +18,6 @@ namespace SpaceGame.General
         public static string Ost => _ost;
         public static string GiveCrystal => _giveCrystal;
         public static string SpawnEnemies => _spawnEnemies;
-
+        public static string AidKit => _aidKit;
     }
 }

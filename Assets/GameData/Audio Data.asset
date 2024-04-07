@@ -48,3 +48,8 @@ MonoBehaviour:
     Volume: 1
     Pitch: 1
     Loop: 0
+  - SoundName: AidKit
+    Clip: {fileID: 8300000, guid: 1f234c7cad2a64a4fb01934ca6e8fd38, type: 3}
+    Volume: 1
+    Pitch: 1
+    Loop: 0

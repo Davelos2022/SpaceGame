@@ -6,7 +6,7 @@ using SpaceGame.UI;
 
 namespace SpaceGame.General
 {
-    public class SpaceShipPlayer : SpaceShipBase, IGiveCrystal
+    public class SpaceShipPlayer : SpaceShipBase, IGiveCrystal, IGiveAidKit
     {
         private PlayerData _playerData;
         private PlayerUI _playerUI;
@@ -78,8 +78,8 @@ namespace SpaceGame.General
 
         public override void SetDamage(float damage)
         {
-            _playerUI.SetHealth(damage);
             base.SetDamage(damage);
+            _playerUI.SetHealth(Health);
         }
 
         public override void Destroy()
@@ -103,6 +103,22 @@ namespace SpaceGame.General
                 RectSpaceShip.transform.DOScale(Vector3.one, DURATION_ANIM).SetAutoKill(true);
                 _playerUI.IncreaseCrystal(value);
             });
+        }
+
+        public bool GiveAidKit(float value)
+        {
+            if (Health >= _playerData.Health) return false;
+
+
+            AudioManager.Play(AudioClipsNames.AidKit);
+            Health += value;
+
+            RectSpaceShip.transform.DOShakeScale(DURATION_ANIM).OnComplete(() =>
+            {
+                _playerUI.SetHealth(Health);
+            });
+
+            return true;
         }
     }
 }

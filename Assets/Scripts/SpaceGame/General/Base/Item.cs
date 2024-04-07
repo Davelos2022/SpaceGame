@@ -37,14 +37,20 @@ namespace SpaceGame.General
             TriggerItem = GetComponent<BoxCollider2D>();
         }
 
-        public void Init(Vector2 spawnPosition)
+        public void Spawn(Vector2 spawnPosition)
         {
+            RectItem.rotation = Quaternion.identity;
             RectItem.anchoredPosition = spawnPosition;
+            ActiveItem();
         }
 
+        public virtual void Destroy()
+        {
+            Subscriptions?.Dispose();
+        }
+
+        protected abstract void ActiveItem();
         public abstract void PauseGame(bool pause);
-        public abstract void Destroy();
-        protected abstract void UseItem();
         #endregion
     }
 }

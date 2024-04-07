@@ -23,12 +23,6 @@ namespace SpaceGame.Pool
 
         private T AddItem()
         {
-            if (!_prefab.GetComponent<T>())
-            {
-                Debug.Log($"Component not found");
-                return null;
-            }
-
             var item = _container.InstantiatePrefab(_prefab, _parent).GetComponent<T>();
             item.gameObject.SetActive(false);
             _objects.Enqueue(item);
@@ -50,5 +44,12 @@ namespace SpaceGame.Pool
             item.transform.position = Vector3.zero;
             _objects.Enqueue(item);
         }
+
+        public void Clear()
+        {
+            _objects.Clear();
+        }
+
+       
     }
 }

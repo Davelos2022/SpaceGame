@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7526908622887693789}
   - component: {fileID: 11746323288493869}
   - component: {fileID: 2531548066959447135}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670056825992916954}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

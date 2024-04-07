@@ -182,9 +182,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16054755}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2126,6 +2126,42 @@ Transform:
   m_Father: {fileID: 2095402856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1016818553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016818554}
+  m_Layer: 8
+  m_Name: AidKits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1016818554
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016818553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1311513798}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1026304610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2946,7 @@ RectTransform:
   - {fileID: 1441847789}
   - {fileID: 355800971}
   - {fileID: 1488583003}
+  - {fileID: 1016818554}
   m_Father: {fileID: 1277201292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3319,8 +3356,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1560319309}
+  - component: {fileID: 1560319311}
   - component: {fileID: 1560319308}
+  - component: {fileID: 1560319310}
   m_Layer: 0
   m_Name: '[POOL_MANAGER]'
   m_TagString: Untagged
@@ -3342,34 +3380,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolObjects:
   - SizePool: 10
-    TypeObject: 0
     Prefabs:
     - {fileID: 8383744336728428116, guid: ccb27e3f0a8abe345b807891053a3418, type: 3}
     Parent: {fileID: 956498447}
-  - SizePool: 100
-    TypeObject: 1
+    NameComponent: SpaceShipEnemy
+  - SizePool: 50
     Prefabs:
     - {fileID: 2670056825992916954, guid: 70f5a38a66b893c4882253f25d217e43, type: 3}
     Parent: {fileID: 1441847789}
+    NameComponent: Bullet
   - SizePool: 20
-    TypeObject: 3
     Prefabs:
     - {fileID: 100002, guid: 6bbb8ec780b04e14089d5889db90227e, type: 3}
     - {fileID: 100002, guid: 27a4fc2d8038d41439665d1004032672, type: 3}
     Parent: {fileID: 355800971}
+    NameComponent: EffectHit
   - SizePool: 20
-    TypeObject: 2
     Prefabs:
-    - {fileID: 1033472435718110, guid: f43435781114624418ca42a563284b17, type: 3}
     - {fileID: 100006, guid: 9f18ee4ac76f92f469346d34cc24cb9c, type: 3}
+    - {fileID: 1033472435718110, guid: f43435781114624418ca42a563284b17, type: 3}
     Parent: {fileID: 355800971}
-  - SizePool: 20
-    TypeObject: 4
+    NameComponent: EffectDestroy
+  - SizePool: 30
     Prefabs:
     - {fileID: 258827910274310573, guid: e01542290c1329d41ac80dc6ef7a1ee5, type: 3}
     Parent: {fileID: 1488583003}
---- !u!4 &1560319309
-Transform:
+    NameComponent: PurpleCrystal
+  - SizePool: 30
+    Prefabs:
+    - {fileID: 258827910274310573, guid: 9426ba53e156ffd4c87323850b27305b, type: 3}
+    - {fileID: 258827910274310573, guid: 5089fd76f6f2eb244a10bba327cf5899, type: 3}
+    Parent: {fileID: 1016818554}
+    NameComponent: AidKit
+--- !u!222 &1560319310
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560319306}
+  m_CullTransparentMesh: 1
+--- !u!224 &1560319311
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3383,6 +3435,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1636524674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,7 +5390,8 @@ MonoBehaviour:
   _maxCountEnemy: 7
   _minCountCrystal: 5
   _maxCountCrystal: 11
-  _timeToNextCrystal: 1.2
+  _timeToNextCrystal: 1.232
+  _dropPercentageAidKLit: 20
 --- !u!4 &2138706020
 Transform:
   m_ObjectHideFlags: 0

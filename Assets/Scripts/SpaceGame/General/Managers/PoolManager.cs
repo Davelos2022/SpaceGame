@@ -3,23 +3,25 @@ using System;
 using System.Collections.Generic;
 using Zenject;
 using SpaceGame.Pool;
+using System.Reflection;
 
 namespace SpaceGame.General
 {
     public class PoolManager : MonoBehaviour
     {
         [Serializable]
-        public class Pool
+        public struct Pool
         {
-            public int SizePool;
-            public TypeObject TypeObject;
+            [Range(1, 300)] public int SizePool;
             public GameObject[] Prefabs;
             public Transform Parent;
+            public string NameComponent;
         }
 
         [SerializeField] private Pool[] _poolObjects;
         private readonly Dictionary<Type, object> _pools = new Dictionary<Type, object>();
         private DiContainer _container;
+        private const string NAMESPACE = "SpaceGame.General";
 
         [Inject]
         public void Construct(DiContainer container)
@@ -27,7 +29,7 @@ namespace SpaceGame.General
             _container = container;
         }
 
-        private void Awake()
+        private void Start()
         {
             InitializePools();
         }
@@ -37,27 +39,16 @@ namespace SpaceGame.General
             foreach (var pool in _poolObjects)
             {
                 int randomPrefab = UnityEngine.Random.Range(0, pool.Prefabs.Length);
+                Type componentType = Type.GetType(NAMESPACE + "." + pool.NameComponent.Trim());
 
-                switch (pool.TypeObject)
+                if (pool.Prefabs[randomPrefab].GetComponent(componentType))
                 {
-                   
-                    case TypeObject.Bullet:
-                        CreatePool<Bullet>(pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent);
-                        break;
-                    case TypeObject.Enemy:
-                        CreatePool<SpaceShipEnemy>(pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent);
-                        break;
-                    case TypeObject.EffectHits:
-                        CreatePool<EffectHit>(pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent);
-                        break;
-                    case TypeObject.EffectDestroy:
-                        CreatePool<EffectDestroy>(pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent);
-                        break;
-                    case TypeObject.Crystal:
-                        CreatePool<PurpleCrystal>(pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent);
-                        break;
-                    default:
-                        return;
+                    MethodInfo createPoolMethod = typeof(PoolManager).GetMethod(nameof(CreatePool)).MakeGenericMethod(componentType);
+                    createPoolMethod.Invoke(this, new object[] { pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent });
+                }
+                else
+                {
+                    Debug.LogError($"Component type {componentType} not found in Name:{pool.Prefabs[randomPrefab].name}.prefab");
                 }
             }
         }

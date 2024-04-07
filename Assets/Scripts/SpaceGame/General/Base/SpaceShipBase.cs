@@ -151,9 +151,7 @@ namespace SpaceGame.General
         public virtual void PauseGame(bool pause)
         {
             IsCanMove = !pause;
-
-            if (LevelController.isActiveEnemies)
-                IsCanAttack = false;
+            IsCanAttack = false;
         }
 
         public virtual void ResetState()
