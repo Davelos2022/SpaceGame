@@ -12,15 +12,16 @@ namespace SpaceGame.General
         [Serializable]
         public struct Pool
         {
+            public string NameComponent;
             [Range(1, 300)] public int SizePool;
             public GameObject[] Prefabs;
             public Transform Parent;
-            public string NameComponent;
         }
 
         [SerializeField] private Pool[] _poolObjects;
         private readonly Dictionary<Type, object> _pools = new Dictionary<Type, object>();
         private DiContainer _container;
+
         private const string NAMESPACE = "SpaceGame.General";
 
         [Inject]
@@ -38,22 +39,22 @@ namespace SpaceGame.General
         {
             foreach (var pool in _poolObjects)
             {
-                int randomPrefab = UnityEngine.Random.Range(0, pool.Prefabs.Length);
                 Type componentType = Type.GetType(NAMESPACE + "." + pool.NameComponent.Trim());
 
-                if (pool.Prefabs[randomPrefab].GetComponent(componentType))
+                if (componentType != null)
                 {
                     MethodInfo createPoolMethod = typeof(PoolManager).GetMethod(nameof(CreatePool)).MakeGenericMethod(componentType);
-                    createPoolMethod.Invoke(this, new object[] { pool.Prefabs[randomPrefab], pool.SizePool, pool.Parent });
+                    createPoolMethod.Invoke(this, new object[] { pool.Prefabs, pool.SizePool, pool.Parent });
                 }
                 else
                 {
-                    Debug.LogError($"Component type {componentType} not found in Name:{pool.Prefabs[randomPrefab].name}.prefab");
+                    Debug.LogError($"NameComponent: '{pool.NameComponent}' not correction or him not in namespace {NAMESPACE}");
                 }
+
             }
         }
 
-        public void CreatePool<T>(GameObject prefab, int size, Transform parent = null) where T : Component
+        public void CreatePool<T>(GameObject[] prefab, int size, Transform parent = null) where T : Component
         {
             var pool = new ComponentPool<T>(_container, prefab, size, parent);
             _pools.Add(typeof(T), pool);

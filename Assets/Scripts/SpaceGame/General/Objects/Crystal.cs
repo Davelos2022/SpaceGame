@@ -5,7 +5,7 @@ using UniRx.Triggers;
 namespace SpaceGame.General
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class PurpleCrystal : Item, IMoveble, IRotation
+    public class Crystal : Item, IMoveble, IRotation
     {
         [SerializeField] private int _valueCrystal;
         [SerializeField] private float _speedMove;
@@ -13,18 +13,19 @@ namespace SpaceGame.General
 
         private bool _isCanMove;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            GameStateManager.PausedGame += PauseGame;
+            base.OnEnable();
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            GameStateManager.PausedGame -= PauseGame;
+            base.OnDisable();
         }
 
         protected override void ActiveItem()
         {
+            base.ActiveItem();
             StartMove();
         }
 
@@ -67,7 +68,6 @@ namespace SpaceGame.General
 
         public override void Destroy()
         {
-            PoolManager.Return(this);
             base.Destroy();
         }
     }

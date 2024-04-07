@@ -170,6 +170,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Crystals_Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 306
+        width: 111
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e088387dd610b464f9da51f46e4fce7b
+      internalID: 1669594854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crystals_Atlas_1
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 317
+        width: 116
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58b760337c1d36140bb1baf463aa297a
+      internalID: 2002323792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crystals_Atlas_2
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 565
+        width: 126
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e239d62c41a574ab91ec498e930316
+      internalID: -852874247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -181,6 +244,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Crystals_Atlas_0: 1669594854
+      Crystals_Atlas_1: 2002323792
+      Crystals_Atlas_2: -852874247
       "\xF0\xBA\xF1\u20AC\xF0\xB0co\xF1\u2021\xF0\xBD\xF1\u2039\xF0\xB5-co\xF1\u20AC\xF1\u201A\xF0\xB8\xF1\u20ACo\xF0\xB2\xF0\xB0\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF1\u0192\xF1_\xF1\u201A\xF0\xB0\xF0\xBDo\xF0\xB2\xF0\xBB\xF0\xB5\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF1\u2039-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF0\xB8\xF1\u2021\xF0\xB5\xF1_\xF0\xBA\xF0\xB0\xF1_-141791769_0": 1114733707
       "\xF0\xBA\xF1\u20AC\xF0\xB0co\xF1\u2021\xF0\xBD\xF1\u2039\xF0\xB5-co\xF1\u20AC\xF1\u201A\xF0\xB8\xF1\u20ACo\xF0\xB2\xF0\xB0\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF1\u0192\xF1_\xF1\u201A\xF0\xB0\xF0\xBDo\xF0\xB2\xF0\xBB\xF0\xB5\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF1\u2039-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF0\xB8\xF1\u2021\xF0\xB5\xF1_\xF0\xBA\xF0\xB0\xF1_-141791769_1": -536642290
       "\xF0\xBA\xF1\u20AC\xF0\xB0co\xF1\u2021\xF0\xBD\xF1\u2039\xF0\xB5-co\xF1\u20AC\xF1\u201A\xF0\xB8\xF1\u20ACo\xF0\xB2\xF0\xB0\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF1\u0192\xF1_\xF1\u201A\xF0\xB0\xF0\xBDo\xF0\xB2\xF0\xBB\xF0\xB5\xF0\xBD\xF0\xBD\xF1\u2039\xF0\xB5-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF1\u2039-\xF0\xBA\xF1\u20AC\xF0\xB8\xF1_\xF1\u201A\xF0\xB0\xF0\xBB\xF0\xBB\xF0\xB8\xF1\u2021\xF0\xB5\xF1_\xF0\xBA\xF0\xB0\xF1_-141791769_10": 2079984573

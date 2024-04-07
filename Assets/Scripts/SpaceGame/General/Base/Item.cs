@@ -31,6 +31,16 @@ namespace SpaceGame.General
             InitializeComponents();
         }
 
+        protected virtual void OnEnable()
+        {
+            GameStateManager.PausedGame += PauseGame;
+        }
+
+        protected virtual void OnDisable()
+        {
+            GameStateManager.PausedGame -= PauseGame;
+        }
+
         private void InitializeComponents()
         {
             RectItem = GetComponent<RectTransform>();
@@ -47,9 +57,14 @@ namespace SpaceGame.General
         public virtual void Destroy()
         {
             Subscriptions?.Dispose();
+            PoolManager.Return(this);
         }
 
-        protected abstract void ActiveItem();
+        protected virtual void ActiveItem()
+        {
+            Subscriptions = new CompositeDisposable();
+        }
+
         public abstract void PauseGame(bool pause);
         #endregion
     }

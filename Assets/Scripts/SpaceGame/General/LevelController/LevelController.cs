@@ -17,11 +17,11 @@ namespace SpaceGame.General
         [SerializeField] [Range(2, 5)] private int _minCountEnemy;
         [SerializeField] [Range(5, 10)] private int _maxCountEnemy;
         [Space]
-        [SerializeField] [Range(5, 10)] private int _minCountCrystal;
-        [SerializeField] [Range(10, 25)] private int _maxCountCrystal;
-        [SerializeField] [Range(1f, 2f)] private float _timeToNextCrystal;
+        [SerializeField] [Range(2f, 5f)] private int _minCountTimeWave;
+        [SerializeField] [Range(5f, 20f)] private int _maxCountTimeWave;
         [Space]
-        [SerializeField] [Range(1f, 100f)] private float _dropPercentageAidKLit;
+        [SerializeField] [Range(1f, 100f)] private float _dropPercentage;
+        [SerializeField] [Range(1f, 5f)] private float _checkDelay;
 
         private GameStateManager _gameStateManager;
         private PoolManager _poolManager;
@@ -32,6 +32,7 @@ namespace SpaceGame.General
         private bool _isMoving;
         private const int MAX_PERCENTAGE = 100;
 
+        private float _timeWave;
         private int _currentCountEnemies;
         private int _currentWave = 1;
         private const float OFF_SET_SPAWN = 150f;
@@ -129,31 +130,30 @@ namespace SpaceGame.General
         #region Methods for wave level
         private IEnumerator StartWave()
         {
+            _timeWave = UnityEngine.Random.Range(_minCountTimeWave, _maxCountTimeWave);
             _isActiveEnemies = false;
             _isMoving = true;
 
-            int randomCountCrystal = UnityEngine.Random.Range(_minCountCrystal, _maxCountCrystal);
+            float tempDelay = _checkDelay;
 
-            for (int x = 0; x < randomCountCrystal; x++)
+            while (_timeWave > 0)
             {
+                _timeWave -= Time.deltaTime;
+                tempDelay -= Time.deltaTime;
+                
+                if (tempDelay <= 0)
+                {
+                    DropItem();
+                    tempDelay = _checkDelay;
+                }
+   
                 if (!_isMoving)
                 {
                     while (!_isMoving)
                         yield return null;
                 }
 
-                Vector2 positionCrystal = GetPositionSpawn();
-                PurpleCrystal crystal = _poolManager.Get<PurpleCrystal>();
-                crystal.Spawn(positionCrystal);
-
-                if (UnityEngine.Random.value < (_dropPercentageAidKLit / MAX_PERCENTAGE))
-                {
-                    Vector2 positionAidKit = GetPositionSpawn();
-                    AidKit aidKit = _poolManager.Get<AidKit>();
-                    aidKit.Spawn(positionAidKit);
-                }
-
-                yield return new WaitForSeconds(_timeToNextCrystal);
+                yield return null;
             }
 
             _isMoving = false;
@@ -166,6 +166,16 @@ namespace SpaceGame.General
         {
             Vector2 position = new Vector2(UnityEngine.Random.Range(-ScreenBorder.WidthBorder, ScreenBorder.WidthBorder), ScreenBorder.HeightBorder);
             return position;
+        }
+
+        private void DropItem()
+        {
+            if (UnityEngine.Random.value < (_dropPercentage / MAX_PERCENTAGE))
+            {
+                Vector2 positionAidKit = GetPositionSpawn();
+                Item dropItewm = _poolManager.Get<Item>();
+                dropItewm.Spawn(positionAidKit);
+            }
         }
 
         private void SpawnEnemies()
