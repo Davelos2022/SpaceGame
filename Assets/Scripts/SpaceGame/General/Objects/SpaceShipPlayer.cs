@@ -109,9 +109,9 @@ namespace SpaceGame.General
         {
             if (Health >= _playerData.Health) return false;
 
-
             AudioManager.Play(AudioClipsNames.AidKit);
             Health += value;
+            Health = Mathf.Clamp(Health, 0, _playerData.Health);
 
             RectSpaceShip.transform.DOShakeScale(DURATION_ANIM).OnComplete(() =>
             {
